@@ -14,10 +14,8 @@ r = requests.get(url)
 
 soup = BeautifulSoup(r.text, "html.parser")
 
-group = soup.div.h2
-print(group)
-#for link in soup.div:
-#    print(link)
+for link in soup.find_all('h3'):
+    print(link.a['href'])
 
 
 
