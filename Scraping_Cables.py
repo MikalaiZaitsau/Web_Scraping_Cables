@@ -44,14 +44,18 @@ for link in list_markTable.find_all('a'):
     links_level_3[link_3] = url+link['href']
 
 # Ссылки уровня 4
-r2 = requests.get(links_level_1[1])
-soup2 = BeautifulSoup(r2.text, "html.parser")
-links_level_2 = {}
-link_2 = 0
-for link in soup2.find_all('h3'):
-    link_2 += 1
-    links_level_2[link_2] = url+link.a['href']
+r4 = requests.get(links_level_3[1])
+soup4 = BeautifulSoup(r4.text, "html.parser")
 
+#category
+category = soup4.h1.text.split(' ')[0]
+
+#name_short
+name_short = soup4.h1.text.split(' ')[1]
+
+#voltage_kV
+
+print(name_short)
 
 
 
@@ -62,7 +66,6 @@ for link in soup2.find_all('h3'):
 '''
 id				                # 1
 category			            # Кабель силовой
-name_full			            # Кабель силовой С ПВХ изоляцией (0,66; 1кВ)
 name_short			            # ВВГнг-FRLS - 0,66/1кВ
 voltage_kV			            # 0,66/1
 nominal_section_mm2		        # 3х50
