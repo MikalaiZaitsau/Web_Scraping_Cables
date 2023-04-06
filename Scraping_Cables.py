@@ -73,7 +73,33 @@ weight_one_km_kg = float(weight_all[0].span.text.split()[0].replace(',', '.'))
 diameter_block = soup4.find(class_='col-md-7 pl0 pad_mob')
 diameter_all = diameter_block.find_all('p')
 diameter_mm = float(diameter_all[0].span.text.split()[0].replace(',', '.'))
-print(diameter_mm)
+
+#current_air_A
+current_block = soup4.find(class_='col-xs-12 col-md-6 pl0 pad_mob elect-table-green')
+item_current = current_block.find_all(class_='col-xs-5 pad0 tar')
+current_air_A = float(item_current[0].text.split()[0])
+
+#current_ground_A
+current_block = soup4.find(class_='col-xs-12 col-md-6 pl0 pad_mob elect-table-green')
+item_current = current_block.find_all(class_='col-xs-5 pad0 tar')
+current_ground_A = float(item_current[1].text.split()[0])
+
+#min_radius_mm
+options_block = soup4.find(class_='col-xs-12 col-md-7 pl0 mt10 obshie-table-blue pad_mob')
+option_block_items = options_block.find_all(class_='col-md-4 col-xs-4 pad0 tar')
+min_radius_mm = float(option_block_items[0].text.split()[0].replace(',', '.'))
+print(min_radius_mm)
+
+#construction_length_m
+options_block = soup4.find(class_='col-xs-12 col-md-7 pl0 mt10 obshie-table-blue pad_mob')
+option_block_items = options_block.find_all(class_='col-md-4 col-xs-4 pad0 tar')
+construction_length_m = int(option_block_items[1].text.split()[0])
+print(construction_length_m)
+
+
+
+
+
 
 
 
@@ -84,6 +110,9 @@ print(diameter_mm)
 
 
 '''
+Параметры для извлечения
+
+
 id				                # 1
 category			            # Кабель силовой
 name_short			            # ВВГнг-FRLS - 0,66/1кВ
@@ -94,7 +123,7 @@ diameter_mm			            # 35,9
 current_air_A			        # 209
 current_ground_A		        # 205
 inductive_impedance_ohm_per_km	# 0,0625
-insulation resistance_Mohm	    # 7
-insulation_thickness_mm		    # 1,4
-Construction length_m		    # 300
+min_radius_mm                   # 39,9
+construction_length_m		    # 300
+
 '''
