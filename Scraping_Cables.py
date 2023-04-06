@@ -46,8 +46,9 @@ soup4 = BeautifulSoup(r4.text, "html.parser")
 
 
 '''
-Присваивание параметров для каждой марки кабеля
-и создание DataFrame c требуемыми параметрами
+Присваивание параметров 
+для каждой марки кабеля
+
 '''
 
 #category
@@ -97,33 +98,18 @@ construction_length_m = int(option_block_items[1].text.split()[0])
 print(construction_length_m)
 
 
+#Создание DataFrame c параметрами кабелей
+cable_dict_item = {'category': category,
+                   'name_short': name_short,
+                   'voltage_kV': voltage_kV,
+                   'nominal_section_mm2': nominal_section_mm2,
+                   'weight_one_km_kg': weight_one_km_kg,
+                   'diameter_mm': diameter_mm,
+                   'current_air_A': current_air_A,
+                   'current_ground_A': current_ground_A,
+                   'min_radius_mm': min_radius_mm,
+                   'construction_length_m': construction_length_m}
 
-
-
-
-
-
-
-
-
-
-
-
-'''
-Параметры для извлечения
-
-
-id				                # 1
-category			            # Кабель силовой
-name_short			            # ВВГнг-FRLS - 0,66/1кВ
-voltage_kV			            # 0,66/1
-nominal_section_mm2		        # 3х50
-weight_one_km_kg		        # 2533
-diameter_mm			            # 35,9
-current_air_A			        # 209
-current_ground_A		        # 205
-inductive_impedance_ohm_per_km	# 0,0625
-min_radius_mm                   # 39,9
-construction_length_m		    # 300
-
-'''
+table_row = pd.DataFrame(cable_dict_item, index=[0])
+table_row.to_excel('cables.xlsx', sheet_name='Cables')
+print(table_row)
