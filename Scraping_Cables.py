@@ -101,7 +101,10 @@ for link in links_level_3.values():
         #construction_length_m
         options_block = soup4.find(class_='col-xs-12 col-md-7 pl0 mt10 obshie-table-blue pad_mob')
         option_block_items = options_block.find_all(class_='col-md-4 col-xs-4 pad0 tar')
-        construction_length_m = int(option_block_items[1].text.split()[0])
+        if len(option_block_items[1].text.split()[0]) < 4:
+            construction_length_m = int(option_block_items[1].text.split()[0])
+        else:
+            construction_length_m = 'N/A'
 
         #Создание DataFrame c параметрами кабелей
         cable_dict_item = {'category': category,
@@ -118,16 +121,11 @@ for link in links_level_3.values():
         #Список словарей(строк) кабелей
         cable_list.append(cable_dict_item)
     except:
-        print('По данной ссылке отсутсвует запрашиваемая информация \
-              или отсутствуют нужная структура страницы:', '\n', link)
+        continue
 
 
-#cable_table = pd.DataFrame(cable_list, index=[0])
-
-
-
-#cable_table.to_excel('cables.xlsx', sheet_name='Cables')
-#print(cable_table)
+cable_table = pd.DataFrame(cable_list)
+cable_table.to_excel('cables.xlsx', sheet_name='Cables')
 
 
 
