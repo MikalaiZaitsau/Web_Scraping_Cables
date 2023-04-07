@@ -1,0 +1,11 @@
+category			            # Кабель силовой
+name_short			            # ВВГнг-FRLS - 0,66/1кВ
+voltage_kV			            # 0,66/1
+nominal_section_mm2		        # 3х50
+weight_one_km_kg		        # 2533
+diameter_mm			            # 35,9
+current_air_A			        # 209
+current_ground_A		        # 205
+inductive_impedance_ohm_per_km	# 0,0625
+min_radius_mm                   # 39,9
+construction_length_m		    # 300
