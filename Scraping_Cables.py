@@ -30,23 +30,6 @@ for link in soup2.find_all('h3'):
     link_2 += 1
     links_level_2[link_2] = url+link.a['href']
 
-'''
-# Ссылки уровня 3 (словарь ссылок links_level_3)
-r3 = requests.get(links_level_2[3])
-soup3 = BeautifulSoup(r3.text, "html.parser")
-links_level_3 = {}
-link_3 = 0
-list_markTable = soup3.find(class_='markTable_on_mr')
-for link in list_markTable.find_all('a'):
-    link_3 += 1
-    links_level_3[link_3] = url+link['href']
-
-
-# Ссылки уровня 4 (словарь ссылок links_level_4)
-r4 = requests.get(links_level_3[1])
-soup4 = BeautifulSoup(r4.text, "html.parser")
-'''
-
 #Словарь марок кабелей для DataFrame
 cable_list = []
 
@@ -57,19 +40,22 @@ for link3 in links_level_2.values():
     # Ссылки уровня 3 (словарь ссылок links_level_3)
     r3 = requests.get(link3)
     soup3 = BeautifulSoup(r3.text, "html.parser")
+    
+    # обработка ссылок с отличной от заданной структурой
     try:
         list_markTable = soup3.find(class_='markTable_on_mr')
         for link in list_markTable.find_all('a'):
             link4 = url+link['href']
-       
+
+            # обработка ссылок с отличной от заданной структурой
             try:
                 r4 = requests.get(link4)
                 soup4 = BeautifulSoup(r4.text, "html.parser")
 
-                #'''
+                '''
                 #Присваивание параметров 
                 #для каждой марки кабеля
-                #'''
+                '''
 
                 #category
                 category = soup4.h1.text.split(' ')[0]
@@ -146,4 +132,3 @@ for link3 in links_level_2.values():
 # экспорт в .xlsx 
 cable_table = pd.DataFrame(cable_list)
 cable_table.to_excel('cables.xlsx', sheet_name='Cables')
-
